@@ -1,0 +1,45 @@
+"编码格式设置
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set encoding=utf-8
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"代码格式设置
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syntax on     		"读法高亮 
+set autoindent 		" 设置自动对齐
+set cindent    		" 设置自动对齐
+set smartindent		" 设置自动对齐
+set number     		" 开启行号 
+set mouse=a  		" 设置鼠标可用
+set tabstop=4 		" 设置tab宽度  
+set shiftwidth=4	" 设置tab宽度
+set tabstop=4		" 设置自动对齐空格数
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"ctags设置
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let Tlist_Sort_Type = "name"    " 按照名称排序
+let Tlist_Compart_Format = 1    " 压缩方式
+let Tlist_Enable_Fold_Column = 0    " 不要显示折叠树
+let Tlist_Show_One_File=1 			"不同时显示多个文件的tag，只显示当前文件的
+let Tlist_Auto_Open=1 
+let Tlist_Use_Right_Window = 1 "在右侧窗口中显示taglist窗口
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"NERDTree设置
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"只剩下目录树时则自动关闭目录树
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
+"自动打开NERDTree
+autocmd vimenter * NERDTree 
+"开启关闭快捷键
+map <F3> :NERDTreeMirror<CR>
+map <F3> :NERDTreeToggle<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"设置
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
