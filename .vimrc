@@ -1,15 +1,23 @@
-"常用设置
+"实用设置
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 关闭vi的一致性模式，避免以前版本的一些Bug和局限
 set nocompatible
-set backspace=indent,eol,start 
+set backspace=indent,eol,start
+"共享剪贴板  
+set clipboard+=unnamed 
+" 修改文自动备份
+set nobackup
+"文件在Vim之外修改过，自动重新读入"
+set autoread
+"设置自动保存内容"
+set autowrite
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 
 " 编码格式设置
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set encoding=utf-8
-set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
+set fileencoding=utf-8
+set fencs=utf-8,ucs-bom,gb18030,gbk,gb2312,chinese
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " 基本设置
@@ -48,7 +56,7 @@ set viminfo+=!
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 用浅色高亮当前行 
 set cursorline
-hi CursorLine   cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
+"hi CursorLine   cterm=NONE ctermbg=black ctermfg=yellow guibg=NONE guifg=NONE
 " 显示当前行号和列号
 set ruler
 " 在状态栏显示正在输入的命令
@@ -101,8 +109,8 @@ let Tlist_Ctags_Cmd = '/usr/bin/ctags'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "只剩下目录树时则自动关闭目录树
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-"自动打开NERDTree
-"autocmd vimenter *  NERDTree
+"当打开vim且没有文件时自动打开NERDTree
+autocmd vimenter * if !argc() | NERDTree | endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "新文件标题设置
@@ -143,17 +151,18 @@ func SetTitle()
 		call append(line(".")+8, "#endif")
 	endif
 
-	"新建文件后，自动定位到文件末尾
-	autocmd BufNewFile * normal G
 endfunc		
+
+"新建文件后，自动定位到文件末尾
+autocmd BufNewFile * normal G
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " 键盘设置
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tagslist开启关闭快捷键
-map <C-l> :TlistToggle<CR>
+map <F2> :TlistToggle<CR>
 "NERDTree开启关闭快捷键
-map <C-j> :NERDTreeToggle<CR>
+map <F3> :NERDTreeToggle<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
