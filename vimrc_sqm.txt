@@ -1,0 +1,339 @@
+set tabstop=8
+set nohls
+"syntax off
+set nu
+set encoding=utf-8
+set termencoding=utf-8
+set fileencoding=utf-8
+set fileencodings=ucs-bom,utf-8,chinese,cp936,gb18030
+
+
+"autocmd BufEnter *.wiki set nonu
+autocmd BufEnter *.md set tabstop=4
+autocmd BufEnter *.lua set tabstop=2
+autocmd BufEnter *.tpl set tabstop=4
+autocmd BufEnter *.html set tabstop=4
+autocmd BufEnter *.py set tabstop=4
+set nocompatible
+
+"autocmd BufEnter *.wiki
+syntax on
+filetype plugin on
+let g:vimwiki_list = [{'path': '~/wiki/Study',
+	\ "syntax": "markdown",
+	\ 'path_html': '~/wiki/html/',
+	\ 'template_path': '~/wiki/template/',
+	\ 'template_default': 'template',
+	\ 'template_ext': '.html',
+	\ 'ext': '.md'},
+	\ {'path': '~/wiki/Work',
+	\ 'ext': '.md',
+	\ "syntax": "markdown",},
+	\ {'path': '~/wiki/Life',
+	\ "syntax": "markdown",
+	\ "ext": '.md'},
+	\ {'path': '~/wiki/blog',
+	\ 'ext': '.md',
+	\ "syntax": "markdown",}
+	\]
+	"多个wiki项目、\ws显示项目列表,或者2\ww进入第二个项目
+	let g:vimwiki_camel_case = 1
+	let g:vimwiki_use_mouse = 1
+	map <F4> <Plug>Vimwiki2HTML
+	map <S-F4> <Plug>VimwikiAll2HTML
+let g:vimwiki_file_exts = 'c, cpp, wav, txt, h, hpp, zip, sh, awk, ps, pdf'
+
+
+set history=1000
+
+"设置匹配模式，输入做括号会出现右括号
+set showmatch
+
+"编辑时显示光标状态
+set ruler
+
+"修改文件自动备份
+set nobackup
+" ctags
+nnoremap <c-]> g<c-]>
+vnoremap <c-]> g<c-]>
+"set autochdir
+"
+"""""""""""""""""Taglist设置"""""""""""""""""
+let Tlist_Auto_Open = 0
+let Tlist_Ctags_Cmd = '/usr/bin/ctags'
+let Tlist_Show_One_File = 1
+let Tlist_Exit_OnlyWindow = 1
+"nnoremap <silent><F2> :TlistToggle<CR>
+
+"set nocompatible               " be iMproved
+"filetype off                   " required!
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required!
+"Bundle 'gmarik/vundle'
+set tags=tags;
+" My Bundles here:
+"
+" original repos on github
+Bundle 'posva/vim-vue'
+Bundle 'tpope/vim-fugitive'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+Bundle 'tpope/vim-rails.git'
+"vim-scripts repos
+Bundle 'L9'
+Bundle 'FuzzyFinder'
+Bundle 'derekwyatt/vim-scala'
+" non github repos
+Bundle 'git://git.wincent.com/command-t.git'
+" ------
+Bundle 'https://github.com/Lokaltog/vim-powerline.git'
+" ------
+Bundle 'https://github.com/terryma/vim-multiple-cursors.git'
+
+Bundle 'git@github.com:alx741/vinfo.git'
+
+" 词典
+Bundle 'git@github.com:ianva/vim-youdao-translater.git'
+
+" lua
+Bundle 'https://github.com/xolox/vim-misc.git'
+Bundle 'https://github.com/xolox/vim-lua-ftplugin.git'
+
+" md文件已经被vimwiki插件set filetype=vimwiki了，所以这里是vimwiki
+" ctagstype对应.ctags文件中设置的语言类型，依旧设置为markdown
+Bundle 'git@github.com:majutsushi/tagbar.git'
+"let g:tagbar_type_markdown = {
+let g:tagbar_type_vimwiki = {
+        \ 'ctagstype' : 'markdown',
+        \ 'kinds' : [
+                \ 'h:headings',
+        \ ],
+    \ 'sort' : 0
+\ }
+nmap <F2> :TagbarToggle<CR>
+let g:tagbar_width = 30
+let g:tagbar_left = 1
+
+"au BufNewFile,BufRead *.md set filetype=markdown
+"let g:tlist_markdown_settings = 'vimwiki;h:Headlins'
+"             vim的filetype	  tags的语言类型
+let g:tlist_vimwiki_settings = 'markdown;h:Headlins'
+
+
+"vnoremap <silent> <C-y> :<C-u>Ydv<CR>
+"nnoremap <silent> <C-y> :<C-u>Ydc<CR>
+"noremap <leader>yd :<C-u>Yde<CR>
+
+" ------
+" NERDTree 文件管理器插件
+" 由Bundle管理
+" 快捷键 ctrl + j
+Bundle 'https://github.com/scrooloose/nerdtree.git'
+Bundle  'https://github.com/mattn/emmet-vim.git'
+" 静态语法检查
+Bundle 'git@github.com:nvie/vim-flake8.git'
+autocmd FileType python map <buffer> <F3> :call Flake8()<CR>
+map <C-j> :NERDTreeToggle<CR>
+" ------
+
+" pydiction,python自动补全
+Bundle 'git@github.com:rkulla/pydiction.git'
+let g:pydiction_location = '/home/sqm/.vim/bundle/pydiction/complete-dict'
+let g:pydiction_menu_height = 8
+
+" 画图ASCII
+Bundle 'git@github.com:vim-scripts/DrawIt.git'
+
+" java补全
+"Bundle 'https://github.com/artur-shaik/vim-javacomplete2.git'
+"autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
+
+
+"filetype plugin  on     " required!
+"
+" Brief help
+" :BundleList          - list configured bundles
+" :BundleInstall(!)    - install(update) bundles
+" :BundleSearch(!) foo - search(or refresh cache first) for foo
+" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+"
+" see :h vundle for more details or wiki for FAQ
+" NOTE: comments after Bundle command are not allowed..
+"
+
+"  vim-powerline
+set nocompatible
+set laststatus=2
+
+set t_Co=256
+let g:Powerline_symbols = 'fancy'
+set fillchars+=stl:\ ,stlnc:\
+
+"跳到上次编辑位置
+if has("autocmd")
+   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+   \| exe "normal g'\"" | endif
+endif
+
+"快捷键 cscope
+"s：查找C代码符号
+"g：查找本定义
+"d：查找本函数调用的函数
+"c：查找调用本函数的函数
+"t：查找本字符串
+"e：查找本egrep模式
+"f：查找本文件
+"i：查找包含本文件的文件
+" cs add /home/sqm/tags/cscope.out
+"
+" 自动添加cscope文件
+set shortmess=a
+if has("cscope")
+    set csprg=/usr/bin/cscope
+    set csto=0
+    set cst
+    set csverb
+    set cspc=3
+    "add any database in current dir
+    if filereadable("cscope.out")
+	silent cs add cscope.out
+    "else search cscope.out elsewhere
+    else
+       let cscope_file=findfile("cscope.out", ".;")
+       let cscope_pre=matchstr(cscope_file, ".*/")
+       if !empty(cscope_file) && filereadable(cscope_file)
+	silent exe "cs add" cscope_file cscope_pre
+       endif
+     endif
+endif
+nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>f :cs find f <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>i :cs find i <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+
+"自动补全
+inoremap ( ()<ESC>i
+inoremap [ []<ESC>i
+inoremap { {<ESC>o}<ESC>O
+inoremap ' ''<ESC>i
+inoremap " ""<ESC>i
+
+" TEX中常用大括号
+autocmd BufEnter *.tex inoremap { {}<ESC>i
+autocmd BufEnter *.md inoremap { {}<ESC>i
+autocmd BufEnter *.py inoremap { {}<ESC>i
+autocmd BufEnter *.vue inoremap { {}<ESC>i
+
+" scala类型没有正常识别，导致vim-scala没有高亮
+autocmd BufEnter *.scala, set filetype=scala
+
+source ~/.vim/plugin/mark.vim
+
+"自动对齐
+set autoindent
+set cindent
+"智能选择对齐方式
+set smartindent
+
+"Python专用
+"let g:pep8_map='whatever'
+" 导致vim很卡
+
+"""""""""""""""""""""""""""""搜索""""""""""""""""""""""""""
+" 高亮
+"set hlsearch
+"
+set background=dark
+set path+=./
+
+" solarized theme configure
+colorscheme solarized
+let g:solarized_termtrans=1	"1为使用Terminal的透明背景
+set background=dark
+
+"高亮结尾空格，这个配置一定要放在颜色方案之后，避免被覆盖
+highlight WhitespaceEOL ctermbg=red guibg=red
+match WhitespaceEOL /\s\+$/
+
+autocmd FileType python setlocal et sta sw=4 sts=4
+autocmd FileType java setlocal et sta sw=4 sts=4
+autocmd FileType lua setlocal et sta sw=2 sts=2
+
+"set cursorcolumn
+"set cursorline
+let b:match_words='\<begin\>:\<end\>'
+
+nmap <C-\>m :! python -m landslide -t ~/Downloads/LandSlideThemes/simple/ -x tables -i "%"   -o >/tmp/b.html<CR><CR>
+
+"新建.c,.h,.sh,.java文件，自动插入文件头
+autocmd BufNewFile *.py,*.cpp,*.[ch],*.sh,*.java exec ":call SetTitle()"
+""定义函数SetTitle，自动插入文件头
+func SetTitle()
+    "如果文件类型为.sh文件
+    if &filetype == 'sh'
+        call setline(1,"\#!/bin/bash")
+        call append(line("."), "\################################################")
+        call append(line(".")+1, "\# File Name: ".expand("%"))
+        call append(line(".")+2, "\# Description:")
+        call append(line(".")+3, "\# Author: sun.qingmeng")
+        call append(line(".")+4, "\# Mail:sqm2050@gmail.com" )
+        call append(line(".")+5, "\# Created_Time: ".strftime("%Y-%m-%d %H:%M:%S"))
+        call append(line(".")+6, "\# Last modified: ".strftime("%Y-%m-%d %H:%M:%s"))
+        call append(line(".")+7, "\################################################")
+        call append(line(".")+8, "")
+    elseif &filetype == 'python'
+        call setline(1,"\#!/usr/bin/env python")
+        call append(line("."),  "# -*- coding: utf-8 -*-")
+        call append(line(".")+1, "")
+"        call append(line(".")+1, "\#########################################################")
+"        call append(line(".")+2, "\# File Name: ".expand("%"))
+"        call append(line(".")+3, "\# Description:")
+"        call append(line(".")+4, "\# Author: sun.qingmeng")
+"        call append(line(".")+5, "\# Mail:sqm2050@gmail.com" )
+"        call append(line(".")+6, "\# Created_Time: ".strftime("%Y-%m-%d %X"))
+"        call append(line(".")+7, "\# Last modified: ".strftime("%Y-%m-%d %X"))
+"        call append(line(".")+8, "\#########################################################")
+    else
+        call setline(1, "/*************************************************************************")
+        call append(line("."),  "  * File Name: ".expand("%"))
+        call append(line(".")+1, "  * Description:")
+        call append(line(".")+2, "  * Author: sun.qingmeng")
+        call append(line(".")+3, "  * Mail:sqm2050@gmail.com")
+        call append(line(".")+4, "  * Created_Time: ".strftime("%Y-%m-%d %X"))
+        call append(line(".")+5, "  * Last modified: ".strftime("%Y-%m-%d %X"))
+        call append(line(".")+6, " ************************************************************************/")
+        call append(line(".")+7, "")
+    endif
+
+"新建文件后，自动定位到文件末尾
+endfunc
+autocmd BufNewFile * normal G
+
+"""""""""""""""""""""""""""""""""""""""""
+""实现上面函数中的，Last modified功能
+"""""""""""""""""""""""""""""""""""""""""
+"autocmd BufWrite,BufWritePre,FileWritePre  *.c    ks|call LastModified()|'s
+func LastModified()
+    if line("$") > 20
+        let l = 20
+    else
+        let l = line("$")
+    endif
+    exe "1,".l."g/Last modified: /s/Last modified: .*/Last modified:".
+            \strftime(" %Y-%m-%d %X" ) . "/e"
+endfunc
+
+"sudo apt-get install vim-gnome-py2
+
+autocmd VimEnter * nested :TagbarOpen
