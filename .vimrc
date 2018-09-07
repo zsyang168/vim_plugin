@@ -56,11 +56,13 @@ filetype plugin on
 filetype indent on
 " 保存全局变量
 set viminfo+=!
+" 去掉输入错误的提示声音
+set noeb
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " 显示设置
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 用浅色高亮当前行
+" 突出显示当前行
 set cursorline
 " 显示当前行号和列号
 set ruler
@@ -81,9 +83,16 @@ set incsearch
 set ignorecase
 " 当搜索的时候尝试smart
 set smartcase
+" 背景设置
+syntax enable
+set background=dark
+"let g:solarized_termcolors=256
+colorscheme solarized
 " 高亮结尾空格
 highlight WhitespaceEOL ctermbg=red guibg=red
 match WhitespaceEOL /\s\+$/
+" 总是显示状态行
+set laststatus=2
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "ctags设置
@@ -124,7 +133,7 @@ autocmd vimenter * if !argc() | NERDTree | endif
 "新文件标题设置
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "新建.c,.h,sh,.Java文件，自动插入文件头
-autocmd BufNewFile *.py,*.cpp,*.[ch],*.sh,*.Java exec ":call SetTitle()"
+autocmd BufNewFile *.cpp,*.[ch],*.sh,*.Java exec ":call SetTitle()"
 ""定义函数SetTitle，自动插入文件头
 func SetTitle()
 	"如果文件类型为.sh文件
@@ -140,7 +149,7 @@ func SetTitle()
 	else
 		call setline(1, "/*************************************************************************")
 		call append(line("."), "	> File Name: ".expand("%"))
-		call append(line(".")+1, "	> Author:yang.zisong ")
+		call append(line(".")+1, "	> Author:yang.zisong")
 		call append(line(".")+2, "	> Mail: zisongyang168@163.com")
 		call append(line(".")+3, "	> Created Time: ".strftime("%c"))
 		call append(line(".")+4, " ************************************************************************/")
@@ -171,7 +180,20 @@ autocmd BufNewFile * normal G
 map <F2> :TlistToggle<CR>
 "NERDTree开启关闭快捷键
 map <F3> :NERDTreeToggle<CR>
-
+"C，C++ 按F5编译运行
+map <A-F5> :call CompileRunGcc()<CR>
+func CompileRunGcc()
+	exec "w"
+	if &filetype == 'c'
+		exec "!gcc % -o %<"
+		exec "! ./%<"
+	elseif &filetype == 'cpp'
+		exec "!g++ % -o %<"
+		exec "! ./%<"
+	elseif &filetype == 'sh'
+		:!./%
+	endif
+endfunc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "设置
