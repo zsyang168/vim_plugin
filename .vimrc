@@ -8,14 +8,18 @@
 " 关闭vi的一致性模式，避免以前版本的一些Bug和局限
 set nocompatible
 set backspace=indent,eol,start
-"共享剪贴板
+" 共享剪贴板
 set clipboard+=unnamed
 " 修改文自动备份
 set nobackup
-"文件在Vim之外修改过，自动重新读入"
+" 文件在Vim之外修改过，自动重新读入"
 set autoread
-"设置自动保存内容"
+" 设置自动保存内容"
 set autowrite
+" 配置改动时自动加载
+autocmd! bufwritepost vimrc source ~/.vimrc
+" 打开文件自动跳到上次编辑的位置
+au BufReadPost * if line("'\'") > 1 && line("'\'") <= line("$") | exe "normal! g'\'" | endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " 编码格式设置
@@ -115,6 +119,8 @@ let Tlist_Exit_OnlyWindow=1
 let Tlist_Auto_Update=1
 " 打开tags用单击
 let Tlist_Use_SingleClick=1
+" 设置魔术
+set magic
 "设置tags
 set tags=tags;
 set autochdir
@@ -128,6 +134,24 @@ let Tlist_Ctags_Cmd = '/usr/bin/ctags'
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 "当打开vim且没有文件时自动打开NERDTree
 autocmd vimenter * if !argc() | NERDTree | endif
+" 让Tree把自己给装饰得多姿多彩漂亮点
+let NERDChristmasTree=1
+" 控制当光标移动超过一定距离时，是否自动将焦点调整到屏中心
+let NERDTreeAutoCenter=1
+" 指定鼠标模式(1.双击打开 2.单目录双文件 3.单击打开)
+let NERDTreeMouseMode=2
+" 是否默认显示书签列表
+let NERDTreeShowBookmarks=1
+" 是否默认显示文件
+let NERDTreeShowFiles=1
+" 是否默认显示隐藏文件
+let NERDTreeShowHidden=1
+" 是否默认显示行号
+let NERDTreeShowLineNumbers=0
+" 窗口位置（’left’ or ‘right’）
+let NERDTreeWinPos='left'
+" 窗口宽度
+let NERDTreeWinSize=31
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "新文件标题设置
@@ -194,6 +218,11 @@ func CompileRunGcc()
 		:!./%
 	endif
 endfunc
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"自动补全设置
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "设置
