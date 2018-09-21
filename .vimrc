@@ -125,8 +125,7 @@ let NERDTreeWinSize=31
 
 "新文件标题设置
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-filetype on
-"新建.c,.h,sh,.Java文件，自动插入文件头
+"新建.py,.c,.h,sh,.Java文件，自动插入文件头
 autocmd BufNewFile *.py,*.cpp,*.[ch],*.sh,*.Java exec ":call SetTitle()"
 ""定义函数SetTitle，自动插入文件头
 func SetTitle()
