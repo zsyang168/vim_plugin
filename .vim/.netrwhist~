@@ -1,6 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/home/sqm/.vim/plugin'
-let g:netrw_dirhist_2='/home/sqm/Documents/flow_md/config'
-let g:netrw_dirhist_3='/home/sqm/Documents/flow_md/config/acl'
-let g:netrw_dirhist_4='/home/sqm/Documents/OCTEON-SDK/examples/named-block'

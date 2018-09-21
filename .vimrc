@@ -44,8 +44,8 @@ set completeopt=longest,menu
 set wildmenu
 " 设置鼠标可用
 "set mouse=a
-set selection=exclusive
-set selectmode=mouse,key
+"set selection=exclusive
+"set selectmode=mouse,key
 " 设置tab宽度
 set tabstop=4
 " 设置自动对齐空格数
@@ -125,6 +125,7 @@ let NERDTreeWinSize=31
 
 "新文件标题设置
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+filetype on
 "新建.c,.h,sh,.Java文件，自动插入文件头
 autocmd BufNewFile *.py,*.cpp,*.[ch],*.sh,*.Java exec ":call SetTitle()"
 ""定义函数SetTitle，自动插入文件头
@@ -218,29 +219,15 @@ autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()
 filetype off
 
 set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call vundle#begin()
 
 "Plugin 'gmarik/vundle'
 set tags=tags;
 " My Bundles here:
-"
-" original repos on github
-Plugin 'posva/vim-vue'
-Plugin 'tpope/vim-fugitive'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-Plugin 'tpope/vim-rails.git'
 "vim-scripts repos
 Plugin 'L9'
 Plugin 'FuzzyFinder'
 Plugin 'derekwyatt/vim-scala'
-" non github repos
-Plugin 'git://git.wincent.com/command-t.git'
-" ------
-Plugin 'https://github.com/Lokaltog/vim-powerline.git'
-" ------
-Plugin 'https://github.com/terryma/vim-multiple-cursors.git'
-
 " lua
 Plugin 'https://github.com/xolox/vim-misc.git'
 Plugin 'https://github.com/xolox/vim-lua-ftplugin.git'
@@ -251,6 +238,7 @@ Plugin 'majutsushi/tagbar.git'
 " nerdtree
 Plugin 'https://github.com/scrooloose/nerdtree.git'
 Plugin  'https://github.com/mattn/emmet-vim.git'
+call vundle#end()
 
 filetype plugin indent on
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
