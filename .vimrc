@@ -43,7 +43,7 @@ set completeopt=longest,menu
 " 增强模式中的命令行自动完成操作
 set wildmenu
 " 设置鼠标可用
-set mouse=a
+"set mouse=a
 set selection=exclusive
 set selectmode=mouse,key
 " 设置tab宽度
@@ -79,8 +79,8 @@ set nowrap
 " 设置代码匹配,包括括号匹配情况
  set showmatch
 " 设置搜索高亮(hlsearch)
-set hlsearch
-set incsearch
+"set hlsearch
+"set incsearch
 " 设置搜索时忽略大小写
 set ignorecase
 " 当搜索的时候尝试smart
@@ -94,33 +94,6 @@ highlight WhitespaceEOL ctermbg=red guibg=red
 match WhitespaceEOL /\s\+$/
 " 总是显示状态行
 set laststatus=2
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"ctags设置
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"按照名称排序
-let Tlist_Sort_Type = "name"
-" 压缩方式
-let Tlist_Compart_Format = 1
-" 不要显示折叠树
-let Tlist_Enable_Fold_Column =0
-"不同时显示多个文件的tag，只显示当前文件的
-let Tlist_Show_One_File=1
-"设置自动打开ctags
-let Tlist_Auto_Open=0
-"在右侧窗口中显示taglist窗口
-let Tlist_Use_Right_Window = 1
-" 当只剩下Tlist的时候自动关闭
-let Tlist_Exit_OnlyWindow=1
-" 自动更新TagList包含最新编辑的文件
-let Tlist_Auto_Update=1
-" 打开tags用单击
-let Tlist_Use_SingleClick=1
-"设置tags
-set tags=tags;
-set autochdir
-"设定系统中ctags程序的位置
-let Tlist_Ctags_Cmd = '/usr/bin/ctags'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "NERDTree设置
@@ -197,9 +170,9 @@ autocmd BufNewFile * normal G
 " 键盘设置
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tagslist开启关闭快捷键
-nmap <F2> :TagbarToggle<CR>
+map <F2> :TagbarToggle<CR>
 "NERDTree开启关闭快捷键
-nmap <C-N> :NERDTreeToggle<CR>
+map <C-j> :NERDTreeToggle<CR>
 "C，C++ 按F5编译运行
 map <A-F5> :call CompileRunGcc()<CR>
 func CompileRunGcc()
@@ -230,9 +203,16 @@ let g:tagbar_type_vimwiki = {
         \ ],
     \ 'sort' : 0
 \ }
-let g:tagbar_width = 30
-let g:tagbar_left = 1
+""设置tagbar使用的ctags的插件,必须要设置对
+let g:tagbar_ctags_bin='/usr/bin/ctags'
+"设置tagbar的窗口宽度
+let g:tagbar_width=30
+"设置tagbar的窗口显示的位置,为左边
+let g:tagbar_right=1
+"打开文件自动 打开tagbar
+autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 "Bundle插件管理设置
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype off
@@ -240,44 +220,37 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-" let Vundle manage Vundle
-" required!
-"Bundle 'gmarik/vundle'
+"Plugin 'gmarik/vundle'
 set tags=tags;
 " My Bundles here:
 "
 " original repos on github
-Bundle 'posva/vim-vue'
-Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-Bundle 'tpope/vim-rails.git'
+Plugin 'posva/vim-vue'
+Plugin 'tpope/vim-fugitive'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'tpope/vim-rails.git'
 "vim-scripts repos
-Bundle 'L9'
-Bundle 'FuzzyFinder'
-Bundle 'derekwyatt/vim-scala'
+Plugin 'L9'
+Plugin 'FuzzyFinder'
+Plugin 'derekwyatt/vim-scala'
 " non github repos
-Bundle 'git://git.wincent.com/command-t.git'
+Plugin 'git://git.wincent.com/command-t.git'
 " ------
-Bundle 'https://github.com/Lokaltog/vim-powerline.git'
+Plugin 'https://github.com/Lokaltog/vim-powerline.git'
 " ------
-Bundle 'https://github.com/terryma/vim-multiple-cursors.git'
-
-Bundle 'git@github.com:alx741/vinfo.git'
-
-" 词典
-Bundle 'git@github.com:ianva/vim-youdao-translater.git'
+Plugin 'https://github.com/terryma/vim-multiple-cursors.git'
 
 " lua
-Bundle 'https://github.com/xolox/vim-misc.git'
-Bundle 'https://github.com/xolox/vim-lua-ftplugin.git'
+Plugin 'https://github.com/xolox/vim-misc.git'
+Plugin 'https://github.com/xolox/vim-lua-ftplugin.git'
 
 " tagbar
-Bundle 'git@github.com:majutsushi/tagbar.git'
+Plugin 'majutsushi/tagbar.git'
 
 " nerdtree
-Bundle 'https://github.com/scrooloose/nerdtree.git'
-Bundle  'https://github.com/mattn/emmet-vim.git'
+Plugin 'https://github.com/scrooloose/nerdtree.git'
+Plugin  'https://github.com/mattn/emmet-vim.git'
 
 filetype plugin indent on
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
