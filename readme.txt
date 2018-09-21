@@ -1,30 +1,7 @@
-NERDTree安装：
-(1)	解压NERD_Tree.zip
-(2)	将plugin目录下的NERD_tree.vim拷贝~/.vim/plugin以及doc目录下的NERD_tree.txt拷贝到~/.vim/doc
-(3) 命令行如下：
-	unzip NERD_tree.zip
-	mkdir -p ~/.vim/{plugin,doc}	 
-	cp plugin/NERD_tree.vim ~/.vim/plugin/
-	cp doc/NERD_tree.txt ~/.vim/doc/
-
 ctags安装：
-(1) 解压并安装ctags-5.8.tar.gz
-(2) 使用 ctags -R *
-(3) 命令知如下：
-	tar zxvf ctags-5.8.tar.gz
-	cd ctags-5.8
-	./configure
-	make
-	(sudo) make install
+yum install ctags
 
-taglist安装：
-(1) 解压taglist_44.zip
-(2)	将plugin目录下的taglist.txt拷贝到/usr/share/vim/vim**/plugin/以及doc目录下的taglist.vim拷贝到/usr/share/vim/vim**/doc/
-(3) 命令行如下：
-	unzip -d taglist taglist_42.zip
-	cd taglist
-	cp doc/taglist.txt /usr/share/vim/vim**/doc/
-	cp plugin/taglist.vim /usr/share/vim/vim**/plugin/
+vim:PluginInstall
 
 快捷键：
 ctrl + w + h    光标 focus 左侧树形目录

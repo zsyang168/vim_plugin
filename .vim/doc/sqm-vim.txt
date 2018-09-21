@@ -1,2 +1,0 @@
-更新系统后要在Vim下执行，重新安装一下插件
-	:BundleInstall
