@@ -22,6 +22,11 @@ if [ $? -eq 0 ]; then
 	 echo "copy .vimrc successfully!"
 fi
 
+cp .gitconfig $HOME
+if [ $? -eq 0 ]; then
+	 echo "copy .gitconfig successfully!"
+fi
+
 vim +PluginInstall +qall
 if [ $? -eq 0 ]; then
 	 echo "install plugin successfully!"

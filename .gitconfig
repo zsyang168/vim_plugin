@@ -1,0 +1,24 @@
+[alias]
+        co = checkout
+        ci = commit
+        st = status -sb
+        br = branch
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	permission-reset = !git diff -p -R --no-color | grep -E \"^(diff|(old|new) mode)\" --color=never | git apply
+[color]
+	all = auto
+	status = auto
+	diff = auto
+	branch = auto
+	interactive = auto
+	grep = auto
+[core]
+	quotepath = false
+	whitespace = cr-at-eol
+[grep]
+	linenumber = true
+[push]
+	default = matching
+[user]
+	name = yang.zisong
+	email = yang.zisong@embedway.com

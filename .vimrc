@@ -10,6 +10,7 @@ set nocompatible
 set backspace=indent,eol,start
 " 共享剪贴板
 set clipboard+=unnamed
+set clipboard=unnamedplus
 " 修改文自动备份
 set nobackup
 " 文件在Vim之外修改过，自动重新读入"
@@ -94,33 +95,6 @@ highlight WhitespaceEOL ctermbg=red guibg=red
 match WhitespaceEOL /\s\+$/
 " 总是显示状态行
 set laststatus=2
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"ctags设置
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"按照名称排序
-let Tlist_Sort_Type = "name"
-" 压缩方式
-let Tlist_Compart_Format = 1
-" 不要显示折叠树
-let Tlist_Enable_Fold_Column =0
-"不同时显示多个文件的tag，只显示当前文件的
-let Tlist_Show_One_File=1
-"设置自动打开ctags
-let Tlist_Auto_Open=0
-"在右侧窗口中显示taglist窗口
-let Tlist_Use_Right_Window = 1
-" 当只剩下Tlist的时候自动关闭
-let Tlist_Exit_OnlyWindow=1
-" 自动更新TagList包含最新编辑的文件
-let Tlist_Auto_Update=1
-" 打开tags用单击
-let Tlist_Use_SingleClick=1
-"设置tags
-set tags=tags;
-set autochdir
-"设定系统中ctags程序的位置
-let Tlist_Ctags_Cmd = '/usr/bin/ctags'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "NERDTree设置
@@ -128,7 +102,7 @@ let Tlist_Ctags_Cmd = '/usr/bin/ctags'
 "只剩下目录树时则自动关闭目录树
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 "当打开vim且没有文件时自动打开NERDTree
-autocmd vimenter * if !argc() | NERDTree | endif
+"autocmd vimenter * if !argc() | NERDTree | endif
 "autocmd vimenter *  NERDTree
 " 让Tree把自己给装饰得多姿多彩漂亮点
 let NERDChristmasTree=1
@@ -151,9 +125,9 @@ let NERDTreeWinSize=31
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "新文件标题设置
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "新建.py,.c,.h,sh,.Java文件，自动插入文件头
-autocmd BufNewFile *.py,*.cpp,*.[ch],*.sh,*.Java exec ":call SetTitle()"
+autocmd BufNewFile *.py,*.cpp,*.[ch],*.sh,*.java exec ":call SetTitle()"
 ""定义函数SetTitle，自动插入文件头
 func SetTitle()
 	"如果文件类型为.sh文件
@@ -165,13 +139,18 @@ func SetTitle()
 		call setline(1,"#!/usr/bin/env python")
 	    call append(line("."),"# coding=utf-8")
 		call append(line(".")+1, "")
+	" java file
+	elseif &filetype == 'java'
+		call setline(1,"public class ".expand('%:r')."{")
+		call append(line("."),"")
+		call append(line(".")+1,"}")
 	"其他类型文件
 	else
 		call setline(1, "/*************************************************************************")
 		call append(line("."), "	> File Name: ".expand("%"))
 		call append(line(".")+1, "	> Author:yang.zisong")
 		call append(line(".")+2, "	> Mail: yang.zisong@embedway.com")
-		call append(line(".")+3, "	> Created Time: ".strftime("%c"))
+		call append(line(".")+3, "	> Created Time: ".strftime("%Y-%m-%d %H:%M:%S"))
 		call append(line(".")+4, " ************************************************************************/")
 		call append(line(".")+5, "")
 	endif
