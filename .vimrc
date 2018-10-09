@@ -221,7 +221,7 @@ autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()
 
 "Bundle插件管理设置
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-filetype off
+filetype on
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
