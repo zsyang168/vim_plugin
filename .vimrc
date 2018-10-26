@@ -197,6 +197,55 @@ endfunc
 
 "自动补全设置
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+inoremap ( ()<ESC>i
+inoremap [ []<ESC>i
+inoremap { {<ESC>o}<ESC>O
+inoremap ' ''<ESC>i
+inoremap " ""<ESC>i
+
+" TEX中常用大括号
+autocmd BufEnter *.tex inoremap { {}<ESC>i
+autocmd BufEnter *.md inoremap { {}<ESC>i
+autocmd BufEnter *.py inoremap { {}<ESC>i
+autocmd BufEnter *.vue inoremap { {}<ESC>i
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"cscope设置
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"快捷键 cscope
+"s：查找C代码符号
+"g：查找本定义
+"d：查找本函数调用的函数
+"c：查找调用本函数的函数
+"t：查找本字符串
+"e：查找本egrep模式
+"f：查找本文件
+"i：查找包含本文件的文件
+
+if has("cscope")
+	set csprg=/usr/bin/cscope
+	set csto=0
+	set cst
+	set nocsverb
+	if filereadable("cscope.out")
+		cs add cscope.out
+	else
+		let cscope_file=findfile("cscope.out",".;")
+		let cscope_pre=matchstr(cscope_file,".*/")
+		if !empty(cscope_file)&&filereadable(cscope_file)
+			exe "cs add" cscope_file  cscope_pre
+		endif
+	endif
+endif
+
+nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>f :cs find f <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>i :cs find i <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -221,7 +270,7 @@ autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()
 
 "Bundle插件管理设置
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-filetype on
+filetype off
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
